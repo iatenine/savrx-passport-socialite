@@ -1,6 +1,6 @@
 <?php
 
-namespace SocialiteProviders\SavrxPassport;
+namespace Savrx\SavrxPassportSocialite;
 
 use GuzzleHttp\RequestOptions;
 use Illuminate\Support\Arr;

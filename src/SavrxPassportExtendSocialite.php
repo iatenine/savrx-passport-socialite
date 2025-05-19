@@ -1,6 +1,6 @@
 <?php
 
-namespace SocialiteProviders\SavrxPassport;
+namespace Savrx\SavrxPassportSocialite;
 
 use SocialiteProviders\Manager\SocialiteWasCalled;
 
