@@ -1,0 +1,19 @@
+{
+    "name": "savrx/savrx-passport-socialite",
+    "require": {
+        "ext-json": "*",
+        "php": "^8.0",
+        "socialiteproviders/manager": "^4.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Jlinhart\\PackageTest\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Jack Linhart",
+            "email": "jlinhart@savrx.com"
+        }
+    ]
+}
