@@ -62,14 +62,22 @@ class Provider extends AbstractProvider
      */
     protected function mapUserToObject(array $user)
     {
+        if (empty($user['data'])) {
+            $user['data'] = [];
+        }
+
+        if (empty($user['data']['user'])) {
+            $user['data']['user'] = [];
+        }
         return (new User)->setRaw($user)->map([
-            'id'       => $user['passport_id'],
-            'nickname' => $user['display_name'],
-            'name'     => $user['display_name'],
-            'email'    => $user['email'],
+            'id'       => $user['data']['user']['passport_id'] ?? null,
+            'nickname' => $user['data']['user']['display_name'] ?? null,
+            'name'     => $user['data']['user']['display_name'] ?? null,
+            'email'    => $user['data']['user']['email'] ?? null,
             'avatar'   => null,
         ]);
     }
+
 
     protected function getSavrxPassportUrl($type)
     {
