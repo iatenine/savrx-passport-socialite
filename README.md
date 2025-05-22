@@ -58,7 +58,27 @@ protected $listen = [
 You should now be able to use the provider like you would regularly use Socialite (assuming you have the facade installed):
 
 ```php
-return Socialite::driver('savrxpassport')->redirect();
+// Initial redirect
+public function redirect() {
+    // Remember to set scopes accordingly
+    return Socialite::driver('savrxpassport')
+        ->setScopes([
+            'read-user',
+            'verify-admin-portal-access'
+        ])
+        ->redirect();
+}
+
+//
+public function callback() {
+    $user = Socialite::driver('savrxpassport');
+    if (!$user || !$user->token || $user->refreshToken) {
+        // handle auth failures
+        return redirect('login.index');
+    }
+    // authenticate
+    return redirect('dashboard.index');
+    }
 ```
 
 ### Returned User fields
