@@ -31,9 +31,34 @@ In Laravel 11, the default `EventServiceProvider` provider was removed. Instead,
 * Note: You do not need to add anything for the built-in socialite providers unless you override them with your own providers.
 
 ```php
-Event::listen(function (\SocialiteProviders\Manager\SocialiteWasCalled $event) {
-    $event->extendSocialite('savrxpassport', Savrx\SavrxPassportSocialite\Provider::class);
-});
+<?php
+
+namespace App\Providers;
+
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Event;
+
+class AppServiceProvider extends ServiceProvider
+{
+    /**
+     * Register any application services.
+     */
+    public function register(): void
+    {
+        //
+    }
+
+    /**
+     * Bootstrap any application services.
+     */
+    public function boot(): void
+    {
+        Event::listen(function (\SocialiteProviders\Manager\SocialiteWasCalled $event) {
+            $event->extendSocialite('savrxpassport', \Savrx\SavrxPassportSocialite\Provider::class);
+        });
+    }
+}
+
 ```
 <details>
 <summary>
@@ -71,7 +96,7 @@ public function redirect() {
 
 //
 public function callback() {
-    $user = Socialite::driver('savrxpassport');
+    $user = Socialite::driver('savrxpassport')->user();
     if (!$user || !$user->token || $user->refreshToken) {
         // handle auth failures
         return redirect('login.index');
