@@ -97,7 +97,7 @@ public function redirect() {
 //
 public function callback() {
     $user = Socialite::driver('savrxpassport')->user();
-    if (!$user || !$user->token || $user->refreshToken) {
+    if (!$user || !$user->token || !$user->refreshToken) {
         // handle auth failures
         return redirect('login.index');
     }
